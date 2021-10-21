@@ -11,13 +11,15 @@ import requests
 url_ddg = "https://api.duckduckgo.com"
 
 
-@pytest.mark.parametrize("presidents", ["Washington", "Adams", "Jefferson", "Madison", "Monroe", "Jackson", "Buren",
-                                        "Harrison", "Tyler", "Polk", "Taylor", "Fillmore", "Pierce", "Buchanan", "Lincoln",
-                                        "Johnson", "Grant", "Hayes", "Garfield", "Arthur", "Cleveland",
-                                        "McKinley", "Roosevelt", "Taft", "Wilson", "Harding", "Coolidge", "Hoover",
-                                        "Truman", "Eisenhower", "Kennedy", "Johnson", "Nixon", "Ford", "Carter", "Reagan",
-                                        "Bush", "Clinton", "Obama", "Trump", "Biden Jr"])
+@pytest.mark.parametrize("presidents", ["Washington", "Adams", "Jefferson", "Madison", "Monroe", "Jackson",
+                                        "Buren", "Harrison", "Tyler", "Polk", "Taylor", "Fillmore", "Pierce",
+                                        "Buchanan", "Lincoln", "Johnson", "Grant", "Hayes", "Garfield", "Arthur",
+                                        "Cleveland", "McKinley", "Roosevelt", "Taft", "Wilson", "Harding", "Coolidge",
+                                        "Hoover", "Truman", "Eisenhower", "Kennedy", "Johnson", "Nixon", "Ford",
+                                        "Carter", "Reagan", "Bush", "Clinton", "Obama", "Trump", "Biden Jr"])
 def test_ddg0(presidents):
     resp = requests.get(url_ddg + "/?q=presidents+of+the+united+states&format=json")
     rsp_data = resp.json()
-    assert presidents in rsp_data["RelatedTopics"]
+    rt = rsp_data["RelatedTopics"]
+    text = rt["Text"]
+    assert presidents in text
