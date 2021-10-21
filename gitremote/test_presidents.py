@@ -18,6 +18,6 @@ url_ddg = "https://api.duckduckgo.com"
                                         "Truman", "Eisenhower", "Kennedy", "Johnson", "Nixon", "Ford", "Carter", "Reagan",
                                         "Bush", "Clinton", "Obama", "Trump", "Biden Jr"])
 def test_ddg0(presidents):
-    resp = requests.get(url_ddg + "/?q=presidents of the united states, " + presidents + "&format=json")
+    resp = requests.get(url_ddg + "/?q=presidents+of+the+united+states,+" + presidents + "&format=json")
     rsp_data = resp.json()
     assert presidents in rsp_data["RelatedTopics"]
